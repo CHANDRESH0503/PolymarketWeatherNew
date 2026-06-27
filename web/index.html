@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Polymarket Weather — Paper Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="grain"></div>
+
+<header class="masthead">
+  <div class="masthead-top">
+    <span class="edition">No. 001 · Paper Edition</span>
+    <span class="weather-glyph">☼ ☁ ✦</span>
+    <span class="edition right" id="dateline">—</span>
+  </div>
+  <h1 class="title">The&nbsp;Polymarket&nbsp;Weather&nbsp;Ledger</h1>
+  <div class="masthead-bottom">
+    <span class="subtitle">Daily Temperature Markets · Forecast-Edge Trading Journal</span>
+    <span class="status" id="status"><span class="dot"></span><span id="status-text">connecting</span></span>
+  </div>
+</header>
+
+<main>
+  <!-- System almanac: what the engine is configured to do, live -->
+  <section class="almanac" id="almanac">
+    <div class="almanac-line"><span class="almanac-k">System</span>
+      <span class="almanac-chips" id="almanac-chips">—</span></div>
+    <div class="almanac-line"><span class="almanac-k">Almanac</span>
+      <span class="almanac-meta" id="almanac-meta">—</span></div>
+  </section>
+
+  <!-- Summary plates -->
+  <section class="plates" id="plates"></section>
+
+  <!-- Equity curve hero -->
+  <section class="panel hero">
+    <div class="panel-head">
+      <h2>Portfolio Equity</h2>
+      <span class="panel-note" id="equity-note">—</span>
+    </div>
+    <div class="chart-wrap"><svg id="equity-chart" preserveAspectRatio="none"></svg></div>
+  </section>
+
+  <div class="two-col">
+    <!-- Open positions ledger -->
+    <section class="panel">
+      <div class="panel-head"><h2>Open Positions</h2><span class="panel-note" id="pos-count">—</span></div>
+      <div class="table-wrap">
+        <table class="ledger" id="positions">
+          <thead><tr>
+            <th class="l">Market</th><th class="l">City</th><th>Side</th>
+            <th class="r">Entry</th><th class="r">Mark</th><th class="r">Slip</th>
+            <th class="r">Model P</th><th class="r">Edge</th><th class="r">P&amp;L</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Forecast vs market -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Forecast vs Market</h2>
+        <select id="event-select" class="select"></select>
+      </div>
+      <div class="fc-stats" id="fc-stats">—</div>
+      <div class="chart-wrap short"><svg id="fc-chart" preserveAspectRatio="none"></svg></div>
+      <div class="legend">
+        <span><i class="sw model"></i> Model (ensemble)</span>
+        <span><i class="sw market"></i> Market-implied</span>
+      </div>
+    </section>
+  </div>
+
+  <div class="two-col">
+    <!-- Tier 3: intraday nowcast -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Intraday Nowcast <span class="badge">Tier 3</span></h2>
+        <span class="panel-note" id="nc-event">—</span>
+      </div>
+      <div class="nc-meter-wrap" id="nc-meter-wrap">
+        <div class="nc-floor" id="nc-floor">—</div>
+        <div class="nc-meter"><div class="nc-meter-fill" id="nc-meter-fill"></div>
+          <span class="nc-meter-label" id="nc-meter-label">collapse</span></div>
+      </div>
+      <div class="chart-wrap short"><svg id="nc-chart" preserveAspectRatio="none"></svg></div>
+      <div class="legend">
+        <span><i class="sw ens"></i> Ensemble</span>
+        <span><i class="sw now"></i> Nowcast</span>
+        <span><i class="sw market"></i> Market</span>
+      </div>
+    </section>
+
+    <!-- Capital allocation / exposure -->
+    <section class="panel">
+      <div class="panel-head"><h2>Capital Allocation</h2><span class="panel-note" id="alloc-note">—</span></div>
+      <div class="gauge-wrap">
+        <div class="gauge"><div class="gauge-fill" id="gauge-deployed"></div>
+          <div class="gauge-mark" id="gauge-buffer"></div></div>
+        <div class="gauge-meta" id="gauge-meta">—</div>
+      </div>
+      <div class="bankroll-ctl">
+        <div class="gauge-meta"><span>Add realized P&amp;L to bankroll</span>
+          <span id="bankroll-avail">—</span></div>
+        <div class="bankroll-row">
+          <input id="bankroll-amount" type="number" min="0" step="0.01"
+                 inputmode="decimal" placeholder="amount $" />
+          <button id="bankroll-add-btn" type="button">Add to Bankroll</button>
+        </div>
+        <div class="bankroll-msg" id="bankroll-msg"></div>
+      </div>
+      <div class="alloc-days" id="alloc-days"></div>
+      <div class="alloc-side" id="alloc-side"></div>
+      <div class="chart-wrap short"><svg id="alloc-chart" preserveAspectRatio="none"></svg></div>
+    </section>
+  </div>
+
+  <div class="two-col">
+    <!-- Daily PnL -->
+    <section class="panel">
+      <div class="panel-head"><h2>Realized P&amp;L by Day</h2><span class="panel-note">USDC</span></div>
+      <div class="chart-wrap short"><svg id="daily-chart" preserveAspectRatio="none"></svg></div>
+    </section>
+
+    <!-- Blotter -->
+    <section class="panel">
+      <div class="panel-head"><h2>Trade Blotter</h2><span class="panel-note" id="blotter-count">—</span></div>
+      <div class="table-wrap tall">
+        <table class="ledger" id="blotter">
+          <thead><tr>
+            <th class="l">Time</th><th class="l">Market</th><th>Side</th>
+            <th class="r">Px</th><th class="r">Size</th><th>State</th><th class="r">P&amp;L</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <div class="two-col">
+    <!-- Tier 0: resolution-source fidelity audit -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Resolution Audit <span class="badge">Source Check</span></h2>
+        <span class="panel-note" id="audit-note">—</span>
+      </div>
+      <div class="audit-head" id="audit-head">—</div>
+      <div class="chart-wrap short"><svg id="audit-chart" preserveAspectRatio="none"></svg></div>
+      <div class="audit-foot" id="audit-foot">—</div>
+    </section>
+
+    <!-- Tier 2: per-station EMOS / bias calibration -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Station Calibration <span class="badge">Tier 2 · EMOS</span></h2>
+        <span class="panel-note" id="cal-note">—</span>
+      </div>
+      <div class="table-wrap">
+        <table class="ledger" id="calibration">
+          <thead><tr>
+            <th class="l">Stn</th><th class="l">City</th>
+            <th class="r">Bias</th><th class="r">a</th><th class="r">b</th>
+            <th class="r">c</th><th class="r">d</th><th>EMOS</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <footer class="colophon">
+    Set in Fraunces &amp; IBM&nbsp;Plex&nbsp;Mono · Forecasts from GFS · ICON · ECMWF ensembles via Open-Meteo ·
+    Resolution per Wunderground station observations · <span id="brier-foot">—</span>
+  </footer>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

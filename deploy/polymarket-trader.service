@@ -1,0 +1,20 @@
+[Unit]
+Description=PolymarketWeather paper trader daemon
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/Polymarket-Weather-
+EnvironmentFile=/root/Polymarket-Weather-/.env
+ExecStart=/root/Polymarket-Weather-/.venv/bin/python -m src.paper.trader --loop 900
+Restart=always
+RestartSec=30
+# Give the daemon up to 60s to shut down gracefully before SIGKILL
+TimeoutStopSec=60
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

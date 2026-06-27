@@ -1,0 +1,104 @@
+# Per-station calibration. emos:{a,b,c,d} (preferred) from
+# scripts/calibrate.py --emos --write : μ=a+b·mean, σ²=c+d·var.
+EGLL:
+  bias: -0.31
+  emos:
+    a: 0.321
+    b: 1.009
+    c: 0.351
+    d: 0.017
+EPWA:
+  bias: 0.07
+  emos:
+    a: -0.258
+    b: 1.03
+    c: 0.254
+    d: 0.527
+KLGA:
+  emos:
+    a: -0.597
+    b: 1.027
+    c: 0.509
+    d: 0.282
+RCSS:
+  bias: 0.25
+  # Targeted humility: Taipei ran 2.6–4.8° (3–4σ) hot in a June heat regime the
+  # EMOS spread didn't anticipate, producing ruinous ~0.000-prob "No" bets. This
+  # hard σ floor caps that overconfidence WITHOUT touching other stations (a
+  # global floor degraded aggregate Brier — see config.py MIN_PREDICTIVE_SIGMA).
+  sigma_min: 2.0
+  emos:
+    a: -0.692
+    b: 1.061
+    c: 1.261
+    d: 0.17
+RJTT:
+  bias: 0.64
+  emos:
+    a: 1.195
+    b: 0.947
+    c: 0.583
+    d: 0.122
+RKPK:
+  bias: -0.35
+  emos:
+    a: 1.919
+    b: 0.938
+    c: 0.539
+    d: 0.03
+RKSI:
+  bias: -1.04
+  emos:
+    a: 4.754
+    b: 0.915
+    c: 1.166
+    d: 0.0
+VHHH:
+  bias: 0.07
+  emos:
+    a: -5.515
+    b: 1.262
+    c: 0.75
+    d: 0.0
+ZBAA:
+  bias: 0.64
+  emos:
+    a: 2.942
+    b: 0.9
+    c: 0.391
+    d: 0.528
+ZGGG:
+  bias: 0.11
+  emos:
+    a: -5.173
+    b: 1.211
+    c: 0.707
+    d: 0.326
+ZHHH:
+  bias: 0.03
+  emos:
+    a: 1.859
+    b: 0.951
+    c: 1.099
+    d: 0.01
+ZSSS:
+  bias: 0.32
+  emos:
+    a: 3.616
+    b: 0.894
+    c: 0.263
+    d: 0.299
+ZUCK:
+  bias: -0.31
+  emos:
+    a: 1.385
+    b: 0.988
+    c: 0.897
+    d: 0.058
+ZUUU:
+  bias: -0.34
+  emos:
+    a: 2.769
+    b: 0.938
+    c: 1.361
+    d: 0.114

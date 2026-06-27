@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.DS_Store
+# Runtime paper-trading state — must NEVER be committed (a stale committed copy
+# clobbers the VPS's live DB on pull). The old "./data" pattern was invalid and
+# ignored nothing, which is how paper.db got tracked in the first place.
+data/
+*.db
+*.db-wal
+*.db-shm

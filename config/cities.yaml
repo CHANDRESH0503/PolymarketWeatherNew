@@ -1,0 +1,32 @@
+# Station registry for Polymarket weather temperature markets.
+#
+# IMPORTANT: Polymarket resolves each market against the highest temperature
+# recorded at a SPECIFIC station (read from the market description / Wunderground
+# URL), rounded to whole degrees Celsius. The bot should parse the station code
+# from each market's description at runtime; this file is the coordinate lookup
+# keyed by the Wunderground/ICAO station code that appears in the resolution URL.
+#
+# Verify each entry against a live market description before trading real size.
+
+stations:
+  RKSI:   { name: "Incheon Intl Airport",      city: "Seoul",     lat: 37.4691, lon: 126.4505, tz: "Asia/Seoul" }
+  RKPK:   { name: "Gimhae Intl Airport",       city: "Busan",     lat: 35.1795, lon: 128.9382, tz: "Asia/Seoul" }
+  RJTT:   { name: "Tokyo Intl (Haneda)",       city: "Tokyo",     lat: 35.5523, lon: 139.7798, tz: "Asia/Tokyo" }
+  RCSS:   { name: "Taipei Songshan",           city: "Taipei",    lat: 25.0694, lon: 121.5519, tz: "Asia/Taipei" }
+  ZSSS:   { name: "Shanghai Hongqiao",         city: "Shanghai",  lat: 31.1979, lon: 121.3363, tz: "Asia/Shanghai" }
+  ZBAA:   { name: "Beijing Capital",           city: "Beijing",   lat: 40.0801, lon: 116.5846, tz: "Asia/Shanghai" }
+  ZUUU:   { name: "Chengdu Shuangliu",         city: "Chengdu",   lat: 30.5785, lon: 103.9471, tz: "Asia/Shanghai" }
+  ZUCK:   { name: "Chongqing Jiangbei",        city: "Chongqing", lat: 29.7192, lon: 106.6417, tz: "Asia/Shanghai" }
+  ZGGG:   { name: "Guangzhou Baiyun",          city: "Guangzhou", lat: 23.3924, lon: 113.2988, tz: "Asia/Shanghai" }
+  ZHHH:   { name: "Wuhan Tianhe",              city: "Wuhan",     lat: 30.7838, lon: 114.2081, tz: "Asia/Shanghai" }
+  VHHH:   { name: "Hong Kong Intl",            city: "Hong Kong", lat: 22.3089, lon: 113.9145, tz: "Asia/Hong_Kong" }
+  EGLL:   { name: "London Heathrow",           city: "London",    lat: 51.4706, lon: -0.4619, tz: "Europe/London" }
+  EPWA:   { name: "Warsaw Chopin",             city: "Warsaw",    lat: 52.1657, lon: 20.9671, tz: "Europe/Warsaw" }
+  # NYC resolves at LaGuardia (KLGA), per the Wunderground URL
+  # (…/us/ny/new-york-city/KLGA) — one of the deepest weather books (ColdMath,
+  # Hans323 concentrate here). NOT YET TRADABLE: US markets quote in °F with
+  # 2-degree RANGE buckets ("82-83°F", "81°F or below"), not the whole-°C
+  # exact/gte/lte buckets our model assumes — needs the °F/range adapter (see
+  # README/WALLETS follow-ups) and a resolution_audit of the range rule first.
+  # Registry-ready so it works the moment that adapter lands.
+  KLGA:   { name: "New York LaGuardia",        city: "New York City", lat: 40.7769, lon: -73.8740, tz: "America/New_York" }

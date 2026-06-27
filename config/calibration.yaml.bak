@@ -1,0 +1,93 @@
+# Per-station calibration. emos:{a,b,c,d} (preferred) from
+# scripts/calibrate.py --emos --write : μ=a+b·mean, σ²=c+d·var.
+EGLL:
+  bias: -0.31
+  emos:
+    a: 0.447
+    b: 1.0
+    c: 0.327
+    d: 0.0
+EPWA:
+  bias: 0.07
+  emos:
+    a: -0.213
+    b: 1.035
+    c: 0.083
+    d: 1.015
+RCSS:
+  bias: 0.25
+  emos:
+    a: -1.06
+    b: 1.078
+    c: 1.072
+    d: 0.262
+RJTT:
+  bias: 0.64
+  emos:
+    a: 0.757
+    b: 0.96
+    c: 0.801
+    d: 0.0
+RKPK:
+  bias: -0.35
+  emos:
+    a: 1.313
+    b: 0.957
+    c: 0.895
+    d: 0.0
+RKSI:
+  bias: -1.04
+  emos:
+    a: 3.324
+    b: 1.002
+    c: 0.912
+    d: 0.062
+VHHH:
+  bias: 0.07
+  emos:
+    a: -7.796
+    b: 1.355
+    c: 0.457
+    d: 0.0
+ZBAA:
+  bias: 0.64
+  emos:
+    a: 2.395
+    b: 0.921
+    c: 0.32
+    d: 0.678
+ZGGG:
+  bias: 0.11
+  emos:
+    a: -2.552
+    b: 1.116
+    c: 0.317
+    d: 0.345
+ZHHH:
+  bias: 0.03
+  emos:
+    a: 0.595
+    b: 0.993
+    c: 1.048
+    d: 0.0
+ZSSS:
+  bias: 0.32
+  emos:
+    a: 1.875
+    b: 0.955
+    c: 0.313
+    d: 0.504
+ZUCK:
+  bias: -0.31
+  emos:
+    a: 0.776
+    b: 1.013
+    c: 1.152
+    d: 0.0
+ZUUU:
+  bias: -0.34
+  emos:
+    a: 1.655
+    b: 0.988
+    c: 1.22
+    d: 0.126

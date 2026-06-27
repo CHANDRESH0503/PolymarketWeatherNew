@@ -1,0 +1,9 @@
+requests>=2.31
+PyYAML>=6.0
+python-dotenv>=1.0
+numpy>=1.26
+scipy>=1.11
+pandas>=2.1
+# Execution (only needed when you enable live trading):
+py-clob-client>=0.17
+flask>=3.0

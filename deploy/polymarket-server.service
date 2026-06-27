@@ -1,0 +1,19 @@
+[Unit]
+Description=PolymarketWeather dashboard server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/Polymarket-Weather-
+EnvironmentFile=/root/Polymarket-Weather-/.env
+ExecStart=/root/Polymarket-Weather-/.venv/bin/python -m src.server
+Restart=always
+RestartSec=10
+TimeoutStopSec=30
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
