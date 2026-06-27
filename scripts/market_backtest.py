@@ -50,6 +50,11 @@ def fetch_closed_events(pages: int, limit: int = 0) -> list[dict]:
         r = requests.get(f"{GAMMA_API}/events", params={
             "closed": "true", "tag_id": 84, "limit": 100, "offset": off,
             "order": "endDate", "ascending": "false"}, timeout=30)
+        # Gamma returns 422 once `offset` runs past the available result count
+        # (rather than an empty list). That just means "no more pages" — stop
+        # cleanly instead of crashing the whole audit/backtest.
+        if r.status_code == 422:
+            break
         r.raise_for_status()
         batch = r.json()
         if not batch:
