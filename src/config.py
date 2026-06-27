@@ -186,6 +186,13 @@ FORECAST_TTL = _f("FORECAST_TTL", 5400)   # seconds (default 90 min)
 # Wallet / CLOB
 PK = os.getenv("PK", "")
 POLY_PROXY_ADDRESS = os.getenv("POLY_PROXY_ADDRESS", "")
+# py-clob-client signature type for the funder wallet:
+#   0 = EOA, 1 = email/Magic proxy, 2 = legacy Polymarket proxy,
+#   3 = POLY_1271 (EIP-1271 smart-contract wallet — the new pUSD/v2 account type).
+# Polymarket's new accounts are EIP-7702-delegated smart wallets holding pUSD as
+# collateral; those authenticate with signature_type=3 and the funder set to the
+# PROFILE address (where the pUSD balance lives), not the deposit address.
+SIGNATURE_TYPE = int(_clean("SIGNATURE_TYPE", "2"))
 CLOB_API_KEY = os.getenv("CLOB_API_KEY", "")
 CLOB_API_SECRET = os.getenv("CLOB_API_SECRET", "")
 CLOB_API_PASSPHRASE = os.getenv("CLOB_API_PASSPHRASE", "")

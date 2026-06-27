@@ -4,6 +4,8 @@ python-dotenv>=1.0
 numpy>=1.26
 scipy>=1.11
 pandas>=2.1
-# Execution (only needed when you enable live trading):
-py-clob-client>=0.17
+# Execution (only needed when you enable live trading).
+# 0.34.6 verified working with the new pUSD / v2-exchange account
+# (signature_type=3, POLY_1271) — confirmed via a live balance read.
+py-clob-client>=0.34.6
 flask>=3.0
