@@ -13,8 +13,15 @@ from dataclasses import dataclass
 import numpy as np
 import requests
 
-ENSEMBLE_URL = "https://ensemble-api.open-meteo.com/v1/ensemble"
-ARCHIVE_URL = "https://archive-api.open-meteo.com/v1/archive"
+from ..config import OPENMETEO_API_KEY
+
+# Free-tier hosts by default; with an API key, the higher-limit customer hosts.
+if OPENMETEO_API_KEY:
+    ENSEMBLE_URL = "https://customer-ensemble-api.open-meteo.com/v1/ensemble"
+    ARCHIVE_URL = "https://customer-archive-api.open-meteo.com/v1/archive"
+else:
+    ENSEMBLE_URL = "https://ensemble-api.open-meteo.com/v1/ensemble"
+    ARCHIVE_URL = "https://archive-api.open-meteo.com/v1/archive"
 # Models with hourly temperature ensemble members available on Open-Meteo.
 MODELS = "gfs_seamless,icon_seamless,ecmwf_ifs025"
 
@@ -27,6 +34,8 @@ _RETRY_STATUS = {429, 500, 502, 503, 504}
 
 def _get(url: str, params: dict, *, timeout: int = 30,
          retries: int = 4, backoff: float = 2.0) -> requests.Response:
+    if OPENMETEO_API_KEY:
+        params = {**params, "apikey": OPENMETEO_API_KEY}
     last_exc: Exception | None = None
     for attempt in range(retries):
         try:

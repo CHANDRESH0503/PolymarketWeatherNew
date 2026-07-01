@@ -197,6 +197,12 @@ CLOB_API_KEY = os.getenv("CLOB_API_KEY", "")
 CLOB_API_SECRET = os.getenv("CLOB_API_SECRET", "")
 CLOB_API_PASSPHRASE = os.getenv("CLOB_API_PASSPHRASE", "")
 
+# Open-Meteo API key (optional). Blank = free tier (shared daily/min rate limits,
+# which a concurrent backtest can exhaust -> 429). Set it to use the higher-limit
+# customer endpoints. The forecast layer auto-routes to customer-*.open-meteo.com
+# and appends apikey when this is non-empty.
+OPENMETEO_API_KEY = _clean("OPENMETEO_API_KEY", "")
+
 # Telegram notifications
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
